@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { RegisterUserDto } from "../../domain/dtos/auth/register.dto";
 import { AuthService } from "../services/auth.service";
 import { CustomError } from "../../domain";
+import { LoginUserDto } from "../../domain/dtos/auth/login.dto";
 
 export class AuthController {
     //En los controladores, se usa método de flecha para evitar problemas con objetos,
@@ -26,7 +27,12 @@ export class AuthController {
     }
 
     loginUser = (req: Request, res: Response) => {
-        res.json('loginUser')
+        const [error, loginterDto] = LoginUserDto.login(req.body)
+        if (error) return res.status(400).json({error})
+            this.authService.loginUser(loginterDto!)
+            .then( user => res.json(user))
+            .catch( error => this.handleError(error, res))
+        
     }
 
     validateEmail = (req: Request, res: Response) => {
