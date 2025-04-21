@@ -3,6 +3,8 @@ import { RegisterUserDto } from "../../domain/dtos/auth/register.dto";
 import { AuthService } from "../services/auth.service";
 import { CustomError } from "../../domain";
 import { LoginUserDto } from "../../domain/dtos/auth/login.dto";
+import { JwtAdapter } from "../../config/jwt.adapter";
+import { UserModel } from "../../data";
 
 export class AuthController {
     //En los controladores, se usa método de flecha para evitar problemas con objetos,
@@ -35,7 +37,11 @@ export class AuthController {
         
     }
 
-    validateEmail = (req: Request, res: Response) => {
-        res.json('validateEmail')
+    validateEmail = ( req: Request, res: Response ) => {
+        const { token } = req.params
+
+        this.authService.validateEmail(token)
+        .then( ()=> res.json('Email validated'))
+        .catch( error => this.handleError(error, res))
     }
 }

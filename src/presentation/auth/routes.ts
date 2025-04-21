@@ -5,8 +5,6 @@ import { EmailService } from '../services/email.service';
 import { envs } from '../../config/envs';
 
 
-
-
 export class AuthRoutes {
 
   static get routes(): Router {
@@ -16,7 +14,8 @@ export class AuthRoutes {
     const emailService = new EmailService(
       envs.MAILER_SERVICE,
       envs.MAILER_EMAIL,
-      envs.MAILER_SECRET_KEY
+      envs.MAILER_SECRET_KEY,
+      envs.SEND_EMAIL
   )
 
     const authService = new AuthService(emailService)
