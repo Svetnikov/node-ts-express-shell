@@ -21,6 +21,17 @@ const categorySchema = new mongoose.Schema(
             required: true
         }
     }
+    
 )
+
+categorySchema.set('toJSON', {
+    virtuals: true,
+    versionKey: false,
+    transform(doc, ret, options) {
+        delete ret._id,
+        delete ret.password
+
+    },
+})
 
 export const CategoryModel = mongoose.model('Category', categorySchema)
