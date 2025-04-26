@@ -22,8 +22,9 @@ export class ProductRoutes {
       // const controller = new CategoryController(categoryService)
     
     // Definir las rutas
-    router.post('/', controller.createProducts );
     router.get('/', controller.getProducts );
+    router.post('/', [AuthMiddleware.validateJWT], controller.createProducts );
+    
 
     return router;
   }
