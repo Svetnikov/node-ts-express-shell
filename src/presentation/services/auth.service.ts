@@ -105,6 +105,5 @@ export class AuthService {
             await user.save()
 
             return true
-    
 }
 }

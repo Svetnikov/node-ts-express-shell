@@ -13,15 +13,15 @@ export class ProductController {
 
     private handleError = (error: unknown, res: Response) => {
         if ( error instanceof CustomError)
-            return res.status(error.statusCode).json(error.message)
+            return res.status(error.statusCode).json({error: error.message})
         console.log(error)
         return res.status(500).json({ error: 'Internal server error.'})
     }
 
     createProducts = async (req: Request, res: Response) => {
-        const [error, creatProductDto] = CreateProductDto.create(
-            { ...req.body,
-                user: req.body.user.id
+        const [error, creatProductDto] = CreateProductDto.create({
+            ...req.body,
+            user: req.body.user.id
             } )
         if (error) return res.status(400).json({ error })
 
