@@ -12,7 +12,7 @@ export class ProductService {
     ) {}
 
     async createProduct( createProductDto: CreateProductDto) {
-         const productExists = await CategoryModel.findOne({ name: createProductDto.name })
+         const productExists = await ProductModel.findOne({ name: createProductDto.name })
          if (productExists) throw CustomError.badRequest('Product already exists')
 
         try {
@@ -39,8 +39,8 @@ export class ProductService {
                 ProductModel.find()
                     .skip((page - 1) * limit)
                     .limit(limit)
-                    .populate('user', 'name email')
-                    .populate('category', '_id')
+                    .populate('user')
+                    .populate('category')
 
             ]
             )
@@ -54,11 +54,7 @@ export class ProductService {
                 total,
                 next: `/api/products?page=${ (page + 1)}&limit=${limit}`,
                 prev:  (page - 1 > 0) ? `/api/products?page=${ (page - 1)}&limit=${limit}` : null,
-                products: products.map(
-                    ({id, name, available}) => {
-                        return {id, name, available}
-                    }
-                )
+                products
             }
             
         } catch (error) {

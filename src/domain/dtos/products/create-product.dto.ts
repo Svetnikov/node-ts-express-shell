@@ -19,7 +19,14 @@ export class CreateProductDto {
             user,
             category,
         } = props
-
+        console.log({
+            name,
+            available,
+            price,
+            description,
+            user,
+            category,
+        })
         if ( !name ) return ['Missing name']
         if ( !user ) return ['Missing user']
         if ( !Validators.isMongoID(user) ) return ['Invalid User ID']

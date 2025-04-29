@@ -23,6 +23,7 @@ export class ProductRoutes {
     
     // Definir las rutas
     router.get('/', controller.getProducts );
+
     router.post('/', [ AuthMiddleware.validateJWT ], controller.createProducts );
 
     return router;
