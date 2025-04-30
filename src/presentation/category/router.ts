@@ -25,6 +25,4 @@ export class CategoryRoutes {
 
     return router;
   }
-
-
 }

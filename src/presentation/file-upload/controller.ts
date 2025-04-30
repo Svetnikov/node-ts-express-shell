@@ -21,8 +21,6 @@ export class FileUploadController {
     uploadFile = async (req: Request, res: Response) => {
 
         const type = req.params.type;
-        const validTypes = ['users', 'products', 'categories']
-        if ( !validTypes.includes(type)) return res.status(400).json({error: `Invalid type ${type}, valid ones: ${validTypes}`})
         //único archivo: objeto
         const files = req.files
         if (!req.files || Object.keys(req.files).length === 0 ) {
@@ -37,8 +35,6 @@ export class FileUploadController {
         //varios archivos: arreglo de objetos
 
         const type = req.params.type;
-        const validTypes = ['users', 'products', 'categories']
-        if ( !validTypes.includes(type)) return res.status(400).json({error: `Invalid type ${type}, valid ones: ${validTypes}`})
         //único archivo: objeto
         // const files = req.files 
         
