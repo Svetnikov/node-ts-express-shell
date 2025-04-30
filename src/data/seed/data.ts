@@ -1,4 +1,5 @@
-import { bcryptAdapter } from '../../config';
+import { bcryptAdapter } from "../../config/bcrypt.adapter";
+
 
 
 

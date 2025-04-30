@@ -18,4 +18,8 @@ export class MongoDatabase {
             console.log('Error.')
         }
     }
+
+    static async disconnect() {
+        await mongoose.disconnect()
+    }
 }
